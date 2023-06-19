@@ -4,88 +4,99 @@
   <title>WEB - CSS</title>
   <meta charset="utf-8">
   <style>
-    body{
-      margin:0;
+    body {
+      margin: 0;
+      background-color: #ffd2ff;
     }
     a {
-      color:black;
+      color: black;
       text-decoration: none;
     }
     h1 {
-      font-size:45px;
+      font-size: 45px;
       text-align: center;
-      border-bottom:1px solid gray;
-      margin:0;
-      padding:20px;
+      border-bottom: 1px solid gray;
+      margin: 0;
+      padding: 20px;
     }
-    ol{
-      border-right:1px solid gray;
-      width:100px;
-      margin:0;
-      padding:20px;
+    ol {
+      border-right: 1px solid gray;
+      width: 100px;
+      margin: 0;
+      padding: 20px;
     }
-    #grid{
-      display: grid;
-      grid-template-columns: 150px 1fr;
+    #date-time {
+      text-align: center;
+      font-size: 20px;
+      margin-top: 30px;
     }
-    #grid ol{
-      padding-left:33px;
-    }
-    #grid #article{
-      padding-left:25px;
-    }
-    @media(max-width:800px){
-      #grid{
-        display: block;
-      }
-      ol{
-        border-right:none;
-      }
-      h1 {
-        border-bottom:none;
-      }
+    #night_day {
+        background-color: #000000;
+        color: #ffffff; 
+        border-radius: 5px; 
+        cursor: pointer; 
     }
   </style>
 </head>
 <body>
-  <h1><a href="index.html">WEB</a></h1>
-  <input id="night_day" type="button" value="night" onclick="
-    nightDayHandler(this);
-  ">
+  <h1><a href="index.html">WEB</a><div id="date-time"></div></h1>
+  <input id="night_day" type="button" value="night" onclick="nightDayHandler(this);">
   <ol>
-      <li><a href="1.html">HTML</a></li>
-      <li><a href="2.html">CSS</a></li>
-      <li><a href="3.html">JavaScript</a></li>
-    </ol>
+    <li><a href="1.html">HTML</a></li>
+    <li><a href="2.html">CSS</a></li>
+    <li><a href="3.html">JavaScript</a></li>
+  </ol>
+  
+  <div id="date-time"></div>
+  
   <script>
-function LinksSetColor(color){
-    var alist = document.querySelectorAll('a');
-    var i = 0;
-    while(i < alist.length){
-      alist[i].style.color = color;
-      i = i + 1;
+    function LinksSetColor(color) {
+      var alist = document.querySelectorAll('a');
+      var i = 0;
+      while (i < alist.length) {
+        alist[i].style.color = color;
+        i = i + 1;
+      }
     }
-  }
-  function BodySetColor(color){
-    document.querySelector('body').style.color = color;
-  }
-  function BodySetBackgroundColor(color){
-    document.querySelector('body').style.backgroundColor = color;
-  }
-  function nightDayHandler(self){
-    var target = document.querySelector('body');
-    if(self.value === 'night'){
-      Body.setBackgroundColor('black');
-      Body.setColor('white');
-      self.value = 'day';
-      Links.setColor('powderblue');
-    } else {
-      Body.setBackgroundColor('white');
-      Body.setColor('black');
-      self.value = 'night';
-      Links.setColor('blue');
+  
+    function BodySetColor(color) {
+      document.querySelector('body').style.color = color;
     }
-  }
-</script>                       
-  </body>
-  </html>
+  
+    function BodySetBackgroundColor(color) {
+      document.querySelector('body').style.backgroundColor = color;
+    }
+  
+    function nightDayHandler(self) {
+      var target = document.querySelector('body');
+      if (self.value === 'night') {
+        BodySetBackgroundColor('black');
+        BodySetColor('white');
+        self.value = 'day';
+        LinksSetColor('powderblue');
+        self.style.backgroundColor = 'white';
+        self.style.color = 'black';
+      } else {
+        BodySetBackgroundColor('white');
+        BodySetColor('black');
+        self.value = 'night';
+        LinksSetColor('blue');
+        self.style.backgroundColor = 'black';
+        self.style.color = 'white';
+    }
+    
+  
+   
+    function updateDateTime() {
+      var dateTimeElement = document.getElementById('date-time');
+      var now = new Date();
+      var date = now.toDateString();
+      var time = now.toLocaleTimeString();
+      dateTimeElement.textContent =  date + ',  ' + time;
+    }
+  
+   
+    setInterval(updateDateTime, 1000);
+  </script>
+</body>
+</html>
